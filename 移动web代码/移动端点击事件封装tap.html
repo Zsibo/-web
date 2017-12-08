@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        //获取box标签
+        var box = document.querySelector(".box");
+        //声明变量
+        var startX, startY, endX, endY, startTime, endTime;
+        var num = 0;
+        // 给box注册touchstart事件 并获取开始时的坐标位置及点击时间
+        box.addEventListener("touchstart", function (e) {
+            var touches = e.touches[0];
+            startX = touches.clientX;
+            startY = touches.clientY;
+            startTime = new Date().getTime();
+
+            // 给box注册touchend事件 并获取结束时的坐标位置
+            box.addEventListener("touchend", function (e) {
+                var touches = e.changedTouches[0];
+                endX = touches.clientX;
+                endY = touches.clientY;
+                endTime = new Date().getTime();
+            })
+            // 对比开始坐标与结束坐标值 差不多相等 则认为是tap点击事件
+            if (Math.abs(startX - endX) < 5 && Math.abs(startY - endY) < 5 && (endTime - startTime) < 100) {
+                num++;
+                box.innerHTML = "tap触发了" + num;
+            }
+        })
+    </script>
+
+</body>
+
+</html>

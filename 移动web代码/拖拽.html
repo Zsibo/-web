@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{
+			width: 300px;
+			height: 300px;
+			border: 1px solid red;
+		}
+		.one{
+			width: 50px;
+			height: 50px;
+			background-color: pink;
+			display: block;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="box"></div>
+	<span class="one" draggable="true" id="spanid"></span>
+	<script>
+		//获取span标签和div
+		var span=document.querySelector(".one");
+		var box=document.querySelector(".box");
+		//元素被拖拽时会触发dragstart事件
+		span.ondragstart=function(e){
+			// 保存相关信息  
+			e.dataTransfer.setData("text","spanid");
+		}
+		//把元素拖拽到容器中,容器也会触发事件 ondrog
+		box.ondrop=function(e){
+			//获取相关信息
+			var id=e.dataTransfer.getData("text");
+			var span1=document.getElementById(id);
+			//将元素追加到容器中
+			e.target.appendChild(span1);
+		}
+		//让容器能够接收拖拽元素
+		box.ondragover=function(e){
+			e.preventDefault();
+		}
+		
+//ondrog和ondrogover事件是拖拽必须事件
+	</script>
+
+</body>
+</html>

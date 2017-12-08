@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="file" class="file_btn">
+	<script>
+		//获取文件上传标签
+		var file_btn=document.querySelector(".file_btn");
+		//注册改变事件
+		file_btn.onchange=function(){
+			//获取上传文件
+			var file=this.files[0];
+			//创建读取器
+			var reader=new FileReader();
+			// 以文件路径方式读取文件
+			reader.readAsDataURL(file);
+			//以文件文本内容方式读取
+			//reader.readAsText(file);
+			//文件读取完毕 输出文件
+			reader.onload=function(){
+				var result=reader.result;
+				console.log(result);
+			}
+		};
+	</script>
+</body>
+</html>

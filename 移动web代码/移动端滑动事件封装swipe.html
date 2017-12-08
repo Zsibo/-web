@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //声明变量
+    var startX,startY,endX,endY,absX,absY;
+    //给document注册tousestart事件 获取开始的坐标
+    document.addEventListener("touchstart",function(e){
+        var touches=e.touches[0];
+        startX=touches.clientX;
+        startY=touches.clientY;
+    })
+    //给document注册touchend事件 获取结束的坐标
+    document.addEventListener("touchend",function(e){
+        var touches=e.changedTouches[0];
+        endX=touches.clientX;
+        endY=touches.clientY;
+        //获取向X轴移动距离及向Y轴移动距离 判断移动方向是水平还是垂直 进而判断滑动手势是向上 向下 向左 向右
+        absX=Math.abs(endX-startX);
+        absY=Math.abs(endY-startY);
+        var direction=absX>absY?
+        endX>startX?"向右":"向左"
+        :endY>startY?"向下":"向上";
+        console.log(direction);
+
+    })
+    
+    </script>
+</body>
+</html>
